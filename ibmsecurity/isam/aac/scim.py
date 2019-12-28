@@ -65,6 +65,21 @@ def update_isam_user(isamAppliance, isam_domain, update_native_users, ldap_conne
         "/mga/scim/configuration/urn:ietf:params:scim:schemas:extension:isam:1.0:User",
         ret_obj)
 
+#Vergel
+#2019.12.28
+#Added function to update a scim attribute mode
+def update_attribute_mode(isamAppliance, schema_name, scim_attribute, mode, scim_subattribute=None, check_mode=False, force=False):
+    """
+    Update Scim attribute mode
+    """
+    url = "/mga/scim/configuration/general/attribute_modes/" + schema_name + "/" + scim_attribute
+    if scim_subattribute is not None:
+        url = url + "/" + scim_subattribute
+
+    return isamAppliance.invoke_put(
+        "Update SCIM settings",
+        url,
+        mode)
 
 def set_all(isamAppliance, scim_configuration, check_mode=False, force=False):
     """
