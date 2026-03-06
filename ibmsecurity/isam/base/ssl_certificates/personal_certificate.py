@@ -186,7 +186,7 @@ def export_cert(isamAppliance, kdb_id, cert_id, filename, check_mode=False, forc
     Exporting a personal certificate from a certificate database
     """
     certexists, certsubject = _check(isamAppliance, kdb_id, label=cert_id)
-    if force or (not certexists and not os.path.exists(filename)):
+    if force or (certexists and not os.path.exists(filename)):
         if not check_mode:  # No point downloading a file if in check_mode
             return isamAppliance.invoke_get_file(
                 "Exporting a personal certificate from a certificate database",
